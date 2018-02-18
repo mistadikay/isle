@@ -3,17 +3,17 @@
 ### Build
 
 ```sbtshell
-sbt package
+sbt clean assembly
 ```
 
 ### Run 
 
-Regular healthcheck:
+Heartbeat mode:
 ```sbtshell
-scala ./target/scala-2.12/isle_2.12-0.1.jar --frequency 100 --type healthcheck
+java -jar target/scala-2.12/agent.jar --frequency 100 --type heartbeat
 ```
 
 File healthcheck:
 ```sbtshell
-scala ./target/scala-2.12/isle_2.12-0.1.jar --frequency 100 --type filecheck --location /path/to/file.txt
+java -jar target/scala-2.12/agent.jar --frequency 100 --type filecheck --location /path/to/file.txt
 ```
