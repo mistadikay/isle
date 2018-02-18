@@ -13,7 +13,7 @@ object Agent extends App {
         parseOptions(map ++ Map('frequency -> value.toInt), tail)
       case "--type" :: value :: tail =>
         value match {
-          case "healthcheck" | "filecheck" =>
+          case "heartbeat" | "filecheck" =>
             parseOptions(map ++ Map('type -> value.toString), tail)
           case unknownType =>
             throw new Error("Unknown option --type: " + unknownType)
@@ -28,7 +28,7 @@ object Agent extends App {
   // Read provided options or initiate with default values
   val options = parseOptions(Map(), args.toList)
   val frequency = options.getOrElse('frequency, 1000).toString.toInt
-  val checkType = options.getOrElse('type, "healthcheck").toString
+  val checkType = options.getOrElse('type, "heartbeat").toString
   val location = options.getOrElse('location, "").toString
 
   // --location is required for filecheck
@@ -36,7 +36,7 @@ object Agent extends App {
     throw new Error("Missing --location param")
 
   val checker = checkType match {
-    case "healthcheck" =>
+    case "heartbeat" =>
       () =>
         reportHealthy()
     case "filecheck" =>
