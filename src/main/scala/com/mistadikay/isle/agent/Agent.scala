@@ -1,4 +1,6 @@
-object Application extends App {
+package com.mistadikay.isle.agent
+
+object Agent extends App {
   type OptionMap = Map[Symbol, Any]
 
   // basic health reporter
